@@ -24,6 +24,18 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const game = await Game.findById(req.params.id);
+    if (!game) {
+      return res.status(404).json({ msg: "Game not found." });
+    }
+    res.json(game);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Server error." });
+  }
+});
 
 router.put("/:id", async (req, res) => {
   try {

@@ -19,13 +19,14 @@ const gameSchema = new mongoose.Schema({
       "Sports",
       "Puzzle",
       "Other",
+      "Horror",
     ],
   },
   platform: {
     type: String,
     required: true,
     trim: true,
-    enum: ["PC", "PlayStation", "Xbox", "Nintendo", "Mobile", "Other"], 
+    enum: ["PC", "PlayStation", "Xbox", "Nintendo", "Mobile", "Other"],
   },
   releaseDate: {
     type: Date,
@@ -35,11 +36,12 @@ const gameSchema = new mongoose.Schema({
     type: Number,
     min: 0,
     max: 10,
-    default: null, 
+    default: null,
   },
 });
 
 gameSchema.index({ platform: 1 });
 gameSchema.index({ genre: 1 });
 
-module.exports = mongoose.model("Game", gameSchema);
+
+export default mongoose.model("Game", gameSchema);
