@@ -37,6 +37,23 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const { genre, platform } = req.query;
+
+    const filter = {};
+    if (genre) filter.genre = genre;
+    if (platform) filter.platform = platform;
+
+    const filteredGames = await Game.find(filter);
+    res.json(filteredGames);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Server error." });
+  }
+});
+
+
 router.put("/:id", async (req, res) => {
   try {
     const updatedGame = await Game.findByIdAndUpdate(req.params.id, req.body, {
